@@ -1,0 +1,12 @@
+#!/bin/bash
+# This will create a new file with extension java
+
+#NEW=${1%%.*}
+
+#javac $1
+
+#java $NEW
+
+#rm *.class
+
+vim $1.java
