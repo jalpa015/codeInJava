@@ -1,9 +1,0 @@
-#!/bin/bash
-
-NEW=${1%%.*}
-
-javac $1
-
-java $NEW
-
-rm *.class

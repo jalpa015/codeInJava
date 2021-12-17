@@ -4,7 +4,7 @@
 
 ## Highest and Minimum Values
 
-```
+```bash
 Integer Min Value = -2147483648
 Integer Max Value = 2147483647
 
@@ -23,3 +23,6 @@ Long Min  Value = -9223372036854775808
 Long Max  Value = 9223372036854775807
 ```
 
+
+
+# Casting in Java
