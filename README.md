@@ -26,3 +26,17 @@ Long Max  Value = 9223372036854775807
 
 
 # Casting in Java
+
+# Strings
+
+string buffer
+strings are immutable
+strings --> class
+
+# Operators
+
+## Operand
+An **Operand** is a term used to describe any object that is manipulated by an **operator**. 
+
+## Expression
+An **expression** is formed by combining variables, literals, method return values and operators.
