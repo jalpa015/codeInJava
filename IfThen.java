@@ -1,5 +1,3 @@
-import javax.lang.model.util.ElementScanner6;
-
 public class IfThen {
     public static void main(String[] args)
     {
