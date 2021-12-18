@@ -1,3 +1,4 @@
+package challenges;
 public class OperatorChallenge {
     public static void main(String[] args)
     {
