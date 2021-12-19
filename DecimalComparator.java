@@ -38,7 +38,7 @@ public class DecimalComparator
     {
         // return True if two double numbers are same upto 3 decimal places
 
-        df = new DecimalFormat("#,###,##0.000");
+       // df = new DecimalFormat("#,###,##0.000");
         System.out.println("HI");
 
         return true;
