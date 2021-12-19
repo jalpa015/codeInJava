@@ -40,7 +40,7 @@ NOTE: Do not add a  main method to solution code.
 public class LeapYear {
     public static void main(String[] args)
     {
-        boolean leap = isLeapYear(1900);
+        boolean leap = isLeapYear(1924);
         System.out.println(" Is a LeapYear: " + leap);
 
     }
@@ -50,19 +50,29 @@ public class LeapYear {
         if(year >= 1 && year <= 9999)
         {
             int value;
-            value = year% 4;
-            value = ((year % 4)% 2);
-            if((year % 4) % 2 == 0)
+
+            value = (year % 4);
+            value = (year / 4) % 2;
+            value = (year % 100);
+            value = (year % 100) % 2;
+
+            value = (year / 400);
+            value = (year % 400) % 2;
+
+            if((year / 4) / 2 == 0)
             {
-                if((year % 100) % 2 == 0)
+                // int value;
+                // value = year / 400;
+                // System.out.println(value);
+                // value = (year / 400) / 2;
+                
+                if((year / 100) / 2 == 0)
                 {
-                    if((year % 400) % 2 == 0)
+                    if((year / 400) / 2 == 0)
                         return true;
                 }
                 else
-                {
                     return false;
-                }
             }
             else
             {
