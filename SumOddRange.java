@@ -1,4 +1,3 @@
-import javax.lang.model.util.ElementScanner6;
 
 /*
 Write a method called isOdd with an int parameter and call it number. The method needs to return a boolean.
