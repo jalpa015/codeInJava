@@ -1,4 +1,3 @@
-import javax.lang.model.util.ElementScanner6;
 
 /*
 Write a method isLeapYear with a parameter of type int named year.
@@ -38,6 +37,19 @@ Examples of input/output:
 NOTE: The method isLeapYear needs to be defined as public static like we have been doing so far in the course.
 NOTE: Do not add a  main method to solution code.
 */
+
+
+/*
+
+Logic of Leap Year
+
+if year is divisible by 400 then is_leap_year
+else if year is divisible by 100 then not_leap_year
+else if year is divisible by 4 then is_leap_year
+else not_leap_year
+
+*/
+
 
 public class LeapYear {
     public static void main(String[] args)
