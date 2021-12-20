@@ -7,6 +7,14 @@ public class ReadingUserInput {
         String name = scanner.nextLine();
         
         System.out.println("Your name is " + name);
+
+
+        System.out.println("Enter your Year of Birth: ");
+        int BirthYear = scanner.nextInt();
+        
+        System.out.println("Your Year of Birth is " + BirthYear);
+
+
     }
     
 }
