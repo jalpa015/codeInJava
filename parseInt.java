@@ -2,11 +2,20 @@ public class parseInt {
     public static void main( String[] args)
     {
         String numberAsString = "2018";
-        int number = Integer.parseInt(numberAsString);
+        int Integernumber = Integer.parseInt(numberAsString);
         
-        number ++;
+        Integernumber ++;
 
-        System.out.println(number);
+        System.out.println(Integernumber);
+
+        // double
+
+        String doubleAsString = "2018.234";
+        double Doublenumber = Double.parseDouble(doubleAsString);
+        
+        Doublenumber ++;
+
+        System.out.println(Doublenumber);
     }
     
 }
