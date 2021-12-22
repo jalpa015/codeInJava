@@ -13,7 +13,7 @@ public class TicTacToe
 
         printINRO();
         createBoard(board);
-
+        System.out.println("Enter Player's Names: ");
         userName(gamePlayers);
 
         for(int i=0; i<checkArray.length; i++)
@@ -25,7 +25,10 @@ public class TicTacToe
                     value = 0;
                     System.out.println("\nTurn: " + gamePlayers[0]);
                     value = userEntry(board,gamePlayers[2], checkArray);
-                    printBoard(board);
+                    if(value == 10)
+                    {
+                        printBoard(board);
+                    }
                 } while(value == 20);
 
                 
@@ -39,7 +42,10 @@ public class TicTacToe
                     value = 0;
                     System.out.println("\nTurn: " + gamePlayers[1]);
                     value = userEntry(board,gamePlayers[3],checkArray);
-                    printBoard(board);
+                    if(value == 10)
+                    {
+                        printBoard(board);
+                    }
                 } while(value == 20);
 
             }
@@ -56,9 +62,16 @@ public class TicTacToe
         System.out.println("\t\t***************************\n");
 
         System.out.println("\n");
-        System.out.println("Let's Play");
+        System.out.println("Game Instructions:\n");
+        System.out.println("Players can select location\t1\t\t2\t\t3");
+        System.out.println("by choosing the number as");
+        System.out.println("shown in the sample Board \t4\t\t5\t\t6");
+        System.out.println("\n\t\t\t\t7\t\t8\t\t9");
+        
+        System.out.println("\n");
 
-        System.out.println("User1: X  and Us\n");
+        System.out.println("Let's Play");
+        System.out.println("Board has been reset\n");
     }
 
     public static void createBoard(String[][] board)
@@ -83,7 +96,7 @@ public class TicTacToe
             System.out.print("Player"+(i+1)+" :");
             gamePlayers[i] = names.nextLine();
 
-            System.out.println(gamePlayers[i]);
+            //System.out.println(gamePlayers[i]);
         }
 
         int checkSymbol =0;
@@ -125,27 +138,53 @@ public class TicTacToe
         }
     }
 
+    public static  void gamelogic(String board[][])
+    {
+        System.out.println("Win?lose logic");
+        int count =0;
 
-    // public static int checkInteger(String input)
-    // {
-    //     int flag = 10;
+        System.out.println("Break");
 
-    //     for(int i=0; i < input.length(); i++)
-    //     {
-    //         if( i==0 && input.charAt(i) == '_')
-    //         {
-    //             continue;
-    //         }
+        int checkX;
+        int checkZERO;
 
-    //         if( !Character.isDigit(input.charAt(i)))
-    //         {
-    //             flag = 20;
-    //         }
+        for(int i=0; i<board.length; i++)
+        {
+            checkX=0;
+            checkZERO=0;
+            for(int j=board.length-1; j>=0; j--)
+            {
+                if(i == (board.length-1)-j)
+                {
+                    System.out.println((i)+ ""+(j)+"R2L\t");
+                }
 
-    //     }
-    //     return flag;
+                if(i == j)
+                {
+                    System.out.println((i)+ ""+(j)+"L2R\t");
+                }
 
-    // }
+                if(i == count)
+                {
+                    //System.out.println((i)+ ""+(j)+"ROW\t");
+                    if(board[i][j].equals("X")) 
+                    {
+                        checkX++;
+                    }
+                    else if(board[i][j].equals("O"))
+                    {
+                        checkZERO++;
+                    }
+                }
+            }
+            count ++;
+            System.out.println("\nRow " + (count));
+            System.out.println("X's: " + checkX);
+            System.out.println("O's: " + checkZERO);
+            
+        }
+
+    }
 
     public static int userEntry(String[][] board, String sym, int checkArray[])
     {
@@ -164,68 +203,61 @@ public class TicTacToe
         if(checkArray[entry-1] == 0)
         {
             signal = 20;
+            System.out.print("Location " + entry + " already Occupied! \n");
         }
         
         else
         {
             signal = 10;
+            checkArray[entry-1] = 0;
             
         }
 
         if(signal == 10)
         {
             checkArray[entry-1] = 0;
-        }
-
-
-
-        for(int j=0; j<checkArray.length; j++)
-        {
-            System.out.print(checkArray[j]);
-        }
-        System.out.println("\n");
-
-
-        switch(entry)
-        {
-            case 1:
-                board[0][0] = sym;
-                break;
             
-            case 2:
-                board[0][1] = sym;
-                break;
-            
-            case 3:
-                board[0][2] = sym;
-                break;
-            
-            case 4:
-                board[1][0] = sym;
-                break;
+            switch(entry)
+            {
+                case 1:
+                    board[0][0] = sym;
+                    break;
+                
+                case 2:
+                    board[0][1] = sym;
+                    break;
+                
+                case 3:
+                    board[0][2] = sym;
+                    break;
+                
+                case 4:
+                    board[1][0] = sym;
+                    break;
 
-            case 5:
-                board[1][1] = sym;
-                break;
-            
-            case 6:
-                board[1][2] = sym;
-                break;
+                case 5:
+                    board[1][1] = sym;
+                    break;
+                
+                case 6:
+                    board[1][2] = sym;
+                    break;
 
-            case 7:
-                board[2][0] = sym;
-                break;
-            
-            case 8:
-                board[2][1] = sym;
-                break;
-            
-            case 9:
-                board[2][2] = sym;
-                break;
+                case 7:
+                    board[2][0] = sym;
+                    break;
+                
+                case 8:
+                    board[2][1] = sym;
+                    break;
+                
+                case 9:
+                    board[2][2] = sym;
+                    break;
 
-            default:
-                System.out.println("Invalid");
+                default:
+                    System.out.println("Invalid");
+            }
         }
 
         return signal;
