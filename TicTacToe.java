@@ -40,7 +40,7 @@ public class TicTacToe
                 do
                 {
                     value = 0;
-                    System.out.println("\nTurn: " + gamePlayers[1]);
+                    System.out.println("\nTurn:  " + gamePlayers[1]);
                     value = userEntry(board,gamePlayers[3],checkArray);
                     if(value == 10)
                     {
