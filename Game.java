@@ -9,25 +9,45 @@ public class Game
         String [] gamePlayers = new String[4];
 
         int [] checkArray = {1,2,3,4,5,6,7,8,9};
-        int winner;
+        int winner [] = new int [2];
+    
 
         createBoard(board);
         createPlayers(gamePlayers);
-        winner = selectPlayerSym(gamePlayers);
-        System.out.println("\nTurn: " + gamePlayers[winner]);
+        winner[0] = selectPlayerSym(gamePlayers);
+        System.out.println("\nTurn: " + gamePlayers[winner[0]]);
         printBoard(board);
 
         int playerSelection;
-        int checkLocation;
+        int checkLocation=50;
 
-        for(int i=0; i<9; i++)
-        {
-            do
+
+
+        int value = winner[0];
+        int test=0;
+
+            for(int i=0; i<9; i++)
             {
-                playerSelection = selectLocation();
-                checkLocation = duplicateEntry(checkArray, playerSelection);
-            }while(checkLocation == 0);
-        }
+                
+                do
+                {
+                    if(checkLocation != 0)
+                    {
+                        value = playerTurn(gamePlayers, value);
+                    }
+
+                    else
+                    {
+                        playerTurn(gamePlayers, value+1);
+        
+
+                    }
+                    
+                    playerSelection = selectLocation(checkArray);
+                    checkLocation = duplicateEntry(checkArray, playerSelection);
+                }while(checkLocation == 0);
+            }
+    
 
 
 
@@ -117,6 +137,30 @@ public class Game
     
     }
 
+
+    //----------------------------------------------------------
+    //------------------------Player Turn-----------------------------
+    //----------------------------------------------------------
+
+    public static int playerTurn(String gamePlayeString[], int number)
+    {
+        if(number % 2 == 0)
+        {
+            System.out.println("\n"+gamePlayeString[0] + "'s Turn --- >");
+            number = 5;
+        }
+        else
+        {
+            System.out.println("\n"+gamePlayeString[1] + "'s Turn --- >");
+            number = 6;
+        }
+        return number;
+        
+    }
+
+
+
+
     //----------------------------------------------------------
     //------------------------Ransom Number-----------------------------
     //----------------------------------------------------------
@@ -130,10 +174,10 @@ public class Game
     }
 
     //----------------------------------------------------------
-    //------------------------Logic-----------------------------
+    //----------------User Location Selection-------------------
     //----------------------------------------------------------
 
-    public static int  selectLocation()
+    public static int  selectLocation(int checkArray [])
     {
         int entry;
         Scanner userInput = new Scanner(System.in);
@@ -141,7 +185,13 @@ public class Game
         {
             System.out.println("\n");
             System.out.print("Enter location number ( 1 - 9): ");
+            availableLocations(checkArray);
             entry = userInput.nextInt();
+
+            if(!(entry >= 1 && entry <= 9))
+            {
+                notice(2);          // Valid Input required
+            }
 
         } while (!(entry >= 1 && entry <= 9));
 
@@ -150,7 +200,7 @@ public class Game
 
 
     //----------------------------------------------------------
-    //------------------------Logic-----------------------------
+    //--------------Check Duplicate Entry-----------------------
     //----------------------------------------------------------
 
     public static int duplicateEntry(int checkArray[], int location)
@@ -162,29 +212,56 @@ public class Game
 
         System.out.println("Location: " + location);
 
-        for(int i=0; i<9; i++)
+        if(checkArray[location-1] == 0)
         {
-            if(checkArray[location-1] == 0)
-            {
-                signal = 0;
-                return signal;
-            }
-            else
-            {
-                signal = 10;
-                checkArray[location-1] = 0;
-                for(int j=0; j<9; j++)
-                {
-                    System.out.print(checkArray[j]);
-                    System.out.print(" ");
-                }
+            availableLocations(checkArray);
+            // System.out.print("Available locations:  ");
+            // for(int j=0; j<9; j++)
+            // {
+            //     if(!(checkArray[j] == 0))
+            //     {
+            //         System.out.print(checkArray[j]);
+            //         System.out.print(" ");
+            //     }
+            // }
+            signal = 0;
+            notice(1);
+            return signal;
+        }
 
-            }
+        else
+        {
+            signal = 10;
+            checkArray[location-1] = 0;
         }
 
         return signal;
     }
 
+
+    //----------------------------------------------------------
+    //----------------------Available Locations-----------------------
+    //----------------------------------------------------------
+
+    public static void availableLocations(int checkArray [])
+    {   
+    
+        System.out.print("\nAvailable locations:  ");
+        for(int j=0; j<9; j++)
+        {
+            if(!(checkArray[j] == 0))
+            {
+                System.out.print(checkArray[j]);
+                System.out.print(" ");
+            }
+        }
+        System.out.print("\n");
+    }
+
+
+
+
+    
 
     //----------------------------------------------------------
     //----------------------Notifications-----------------------
@@ -198,37 +275,9 @@ public class Game
                 System.out.print("Location not available!");
                 break;
                 
-                // case 2:
-                //     board[0][1] = sym;
-                //     break;
-                
-                // case 3:
-                //     board[0][2] = sym;
-                //     break;
-                
-                // case 4:
-                //     board[1][0] = sym;
-                //     break;
-
-                // case 5:
-                //     board[1][1] = sym;
-                //     break;
-                
-                // case 6:
-                //     board[1][2] = sym;
-                //     break;
-
-                // case 7:
-                //     board[2][0] = sym;
-                //     break;
-                
-                // case 8:
-                //     board[2][1] = sym;
-                //     break;
-                
-                // case 9:
-                //     board[2][2] = sym;
-                //     break;
+         case 2:
+         System.out.print("Valid Input range (1 - 9) <----- Invalid Input");
+                break;
 
             default:
                 System.out.println("Invalid");
