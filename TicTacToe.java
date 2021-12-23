@@ -18,13 +18,15 @@ public class TicTacToe
 
         for(int i=0; i<checkArray.length; i++)
         {
-            if(!(checkArray[i] % 2 == 0))
+            if(!(i % 2 == 0))
             {
                 do
                 {
                     value = 0;
                     System.out.println("\nTurn: " + gamePlayers[0]);
+                    System.out.println("Value:  " + value);
                     value = userEntry(board,gamePlayers[2], checkArray);
+                    gamelogic(board);
                     if(value == 10)
                     {
                         printBoard(board);
@@ -41,7 +43,9 @@ public class TicTacToe
                 {
                     value = 0;
                     System.out.println("\nTurn:  " + gamePlayers[1]);
+                    System.out.println("Value:  " + value);
                     value = userEntry(board,gamePlayers[3],checkArray);
+                    gamelogic(board);
                     if(value == 10)
                     {
                         printBoard(board);
@@ -81,9 +85,9 @@ public class TicTacToe
             for(int j=0; j<board.length; j++)
             {
                 board[i][j] = "_";
-                System.out.print("\t" + board[i][j] + "\t");
+                //System.out.print("\t" + board[i][j] + "\t");
             }
-            System.out.println("\n\n");
+            //System.out.println("\n\n");
         }
     }
 
@@ -142,26 +146,58 @@ public class TicTacToe
     {
         System.out.println("Win?lose logic");
         int count =0;
+        int colCount = 2;
 
-        System.out.println("Break");
+        System.out.println("Break" + colCount);
 
-        int checkX;
-        int checkZERO;
+        int rowcheckX=0;
+        int rowcheckZERO=0;
+
+        int D1checkX=0;
+        int D1checkZERO=0;
+
+        int D2checkX=0;
+        int D2checkZERO=0;
+
+
 
         for(int i=0; i<board.length; i++)
         {
-            checkX=0;
-            checkZERO=0;
+            // rowcheckX=0;
+            // rowcheckZERO=0;
+
+            // D1checkX=0;
+            // D1checkZERO=0;
+
+            // D2checkX=0;
+            // D2checkZERO=0;
+
             for(int j=board.length-1; j>=0; j--)
             {
                 if(i == (board.length-1)-j)
                 {
-                    System.out.println((i)+ ""+(j)+"R2L\t");
+                    //System.out.println((i)+ ""+(j)+"R2L\t");
+                    if(board[i][j].equals("X")) 
+                    {
+                        D1checkX++;
+                    }
+                    else if(board[i][j].equals("O"))
+                    {
+                        D1checkZERO++;
+                    }
                 }
 
                 if(i == j)
                 {
-                    System.out.println((i)+ ""+(j)+"L2R\t");
+                    //System.out.println((i)+ ""+(j)+"L2R\t");
+                    if(board[i][j].equals("X")) 
+                    {
+                        D2checkX++;
+                    }
+                    else if(board[i][j].equals("O"))
+                    {
+                        D2checkZERO++;
+                    }
                 }
 
                 if(i == count)
@@ -169,18 +205,32 @@ public class TicTacToe
                     //System.out.println((i)+ ""+(j)+"ROW\t");
                     if(board[i][j].equals("X")) 
                     {
-                        checkX++;
+                        rowcheckX++;
                     }
                     else if(board[i][j].equals("O"))
                     {
-                        checkZERO++;
+                        rowcheckZERO++;
                     }
                 }
             }
             count ++;
-            System.out.println("\nRow " + (count));
-            System.out.println("X's: " + checkX);
-            System.out.println("O's: " + checkZERO);
+            
+        }
+
+        System.out.println("\nD1 " );
+        System.out.println("X's: " + D1checkX);
+        System.out.println("O's: " + D1checkZERO);
+
+
+        System.out.println("\nD2 " + (count));
+        System.out.println("X's: " + D2checkX);
+        System.out.println("O's: " + D2checkZERO);
+
+        if((D1checkX == 3) || (D2checkX == 3) || 
+        (D1checkZERO == 3) || (D2checkZERO ==3) ||
+        (rowcheckX==3) || rowcheckZERO ==3)
+        {
+            System.out.println("You win!");
             
         }
 
