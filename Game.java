@@ -14,46 +14,52 @@ public class Game
 
         createBoard(board);
         createPlayers(gamePlayers);
-        winner[0] = selectPlayerSym(gamePlayers);
-        System.out.println("\nTurn: " + gamePlayers[winner[0]]);
-        printBoard(board);
+        
+        //printBoard(board);
 
         int playerSelection;
         int checkLocation=50;
 
 
-
-        int value = winner[0];
-        int test=0;
+        int value = tossResult(gamePlayers);
+        int checker = 0;
+        int index = 0;
+        
+        String playerSYM = "X";
 
             for(int i=0; i<9; i++)
             {
-                
                 do
                 {
                     if(checkLocation != 0)
                     {
                         value = playerTurn(gamePlayers, value);
-                    }
-
-                    else
-                    {
-                        playerTurn(gamePlayers, value+1);
-        
-
+                        // value will change everytime it runs Even\Odd
+                        // value is not an index, DO not use as index
+                        
+                        if(value == 0)
+                        {
+                            checker = 1;
+                        }
+                        else
+                            checker = 0;
+                        
+                        
+                        playerSYM = gamePlayers[checker + 2];
+                        printBoard(board);
                     }
                     
+
+                    System.out.println("\t " +gamePlayers[checker] + "'s Turn <----> " + gamePlayers[checker+2]);
                     playerSelection = selectLocation(checkArray);
-                    checkLocation = duplicateEntry(checkArray, playerSelection);
+                    checkLocation = duplicateEntry(board, checkArray, playerSelection,playerSYM);
+
                 }while(checkLocation == 0);
             }
-    
-
-
-
-
-
     }
+
+
+
     //----------------------------------------------------------
     //------------------------Board-----------------------------
     //----------------------------------------------------------
@@ -98,61 +104,57 @@ public class Game
     //-------------------Mark Selection & Toss------------------
     //----------------------------------------------------------
 
-    public static int selectPlayerSym(String gamePlayers[]) throws InterruptedException
+    public static int tossResult(String gamePlayers[])
     {
         //returns the integer indicating index of the winner!
 
         int player0 = randomNumber(20);
         int player1 = randomNumber(20);
-        int tossWinner;
+        int tossWinner=90;
 
-        System.out.println("Toss!");
-        for(int i=0; i<5; i++)
-        {
-            Thread.sleep(500);
-            System.out.print(" * ");
-        }
-        System.out.println("\n");
-
+        // System.out.println("random number: " + player0);
+        // System.out.println("random number: " + player1);
+        
         if(player0 >= player1)
         {
-            System.out.println(gamePlayers[0] + " wins the toss!");
             gamePlayers[2] = "X";
             gamePlayers[3] = "O";
-            System.out.println(gamePlayers[0] + " will use " + gamePlayers[2]);
-            System.out.println(gamePlayers[1] + " will use " + gamePlayers[3]);
             tossWinner = 0;
         }
         else
         {
-            System.out.println(gamePlayers[1] + " wins the toss!");
             gamePlayers[3] = "X";
             gamePlayers[2] = "O";
-            System.out.println(gamePlayers[1] + " will use " + gamePlayers[3]);
-            System.out.println(gamePlayers[0] + " will use " + gamePlayers[2]);
             tossWinner = 1;
+
         }
+        System.out.println("\n");
+        System.out.println("******************Toss Results*******************");
+        System.out.println("\t Player: \"" + gamePlayers[tossWinner] + "\" playing with sign: " + gamePlayers[tossWinner + 2]);
+        System.out.println("**************************************************");
 
         return tossWinner;
-    
+
+        
     }
+        
 
 
     //----------------------------------------------------------
     //------------------------Player Turn-----------------------------
     //----------------------------------------------------------
 
-    public static int playerTurn(String gamePlayeString[], int number)
+    public static int playerTurn(String gamePlayers[], int number)
     {
         if(number % 2 == 0)
         {
-            System.out.println("\n"+gamePlayeString[0] + "'s Turn --- >");
-            number = 5;
+            //System.out.println("\n"+gamePlayers [0] + "'s Turn --- >");
+            number = 1;    // this will make sure nect person will get next turn
         }
         else
         {
-            System.out.println("\n"+gamePlayeString[1] + "'s Turn --- >");
-            number = 6;
+            //System.out.println("\n"+gamePlayers[1] + "'s Turn --- >");
+            number = 0;    // this will make sure nect person will get next turn
         }
         return number;
         
@@ -183,11 +185,12 @@ public class Game
         Scanner userInput = new Scanner(System.in);
         do
         {
-            System.out.println("\n");
-            System.out.print("Enter location number ( 1 - 9): ");
+            //System.out.println("\n");
             availableLocations(checkArray);
+            System.out.print("Enter location number ( 1 - 9): ");
             entry = userInput.nextInt();
 
+            
             if(!(entry >= 1 && entry <= 9))
             {
                 notice(2);          // Valid Input required
@@ -203,29 +206,21 @@ public class Game
     //--------------Check Duplicate Entry-----------------------
     //----------------------------------------------------------
 
-    public static int duplicateEntry(int checkArray[], int location)
+    public static int duplicateEntry(String board[][], int checkArray[], int location, String playerSYM)
     {
         // return 0 for invalid move
         // and 10 for valid move
 
         int signal= 20;
 
-        System.out.println("Location: " + location);
+        //System.out.println("Location: " + location);
 
         if(checkArray[location-1] == 0)
         {
-            availableLocations(checkArray);
-            // System.out.print("Available locations:  ");
-            // for(int j=0; j<9; j++)
-            // {
-            //     if(!(checkArray[j] == 0))
-            //     {
-            //         System.out.print(checkArray[j]);
-            //         System.out.print(" ");
-            //     }
-            // }
+            //availableLocations(checkArray);
             signal = 0;
             notice(1);
+            System.out.println("\n");
             return signal;
         }
 
@@ -233,6 +228,8 @@ public class Game
         {
             signal = 10;
             checkArray[location-1] = 0;
+            configureBoard(board, location, playerSYM);
+
         }
 
         return signal;
@@ -258,11 +255,6 @@ public class Game
         System.out.print("\n");
     }
 
-
-
-
-    
-
     //----------------------------------------------------------
     //----------------------Notifications-----------------------
     //----------------------------------------------------------
@@ -272,18 +264,69 @@ public class Game
         switch(number)
         {
             case 1:
-                System.out.print("Location not available!");
+                System.out.println("\tLocation not available! Choose from available locations!");
                 break;
                 
-         case 2:
-         System.out.print("Valid Input range (1 - 9) <----- Invalid Input");
+            case 2:
+                System.out.print("Valid Input range (1 - 9) <----- Invalid Input");
+                break;
+
+            default:
+                System.out.print("Invalid Input");
+        }
+    
+        
+    }
+
+    //----------------------------------------------------------
+    //----------------------Configure Board---------------------
+    //----------------------------------------------------------
+
+    public static void configureBoard(String board[][], int entry, String sym)
+    {
+        switch(entry)
+        {
+            case 1:
+                board[0][0] = sym;
+                break;
+        
+            case 2:
+                board[0][1] = sym;
+                break;
+        
+            case 3:
+                board[0][2] = sym;
+                break;
+        
+            case 4:
+                board[1][0] = sym;
+                break;
+
+            case 5:
+                board[1][1] = sym;               
+                break;
+                
+            case 6:
+                board[1][2] = sym;
+                break;
+
+            case 7:
+                board[2][0] = sym;
+                break;               
+                
+            case 8:
+                board[2][1] = sym;
+                break;
+                
+            case 9:
+                board[2][2] = sym;
                 break;
 
             default:
                 System.out.println("Invalid");
         }
-    
-        
+
     }
+
 
 }
