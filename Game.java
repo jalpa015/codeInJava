@@ -14,7 +14,20 @@ public class Game
         createBoard(board);
         createPlayers(gamePlayers);
         winner = selectPlayerSym(gamePlayers);
+        System.out.println("\nTurn: " + gamePlayers[winner]);
         printBoard(board);
+
+        int playerSelection;
+        int checkLocation;
+
+        for(int i=0; i<9; i++)
+        {
+            do
+            {
+                playerSelection = selectLocation();
+                checkLocation = duplicateEntry(checkArray, playerSelection);
+            }while(checkLocation == 0);
+        }
 
 
 
@@ -120,7 +133,108 @@ public class Game
     //------------------------Logic-----------------------------
     //----------------------------------------------------------
 
+    public static int  selectLocation()
+    {
+        int entry;
+        Scanner userInput = new Scanner(System.in);
+        do
+        {
+            System.out.println("\n");
+            System.out.print("Enter location number ( 1 - 9): ");
+            entry = userInput.nextInt();
+
+        } while (!(entry >= 1 && entry <= 9));
+
+        return entry;
+    }
 
 
+    //----------------------------------------------------------
+    //------------------------Logic-----------------------------
+    //----------------------------------------------------------
+
+    public static int duplicateEntry(int checkArray[], int location)
+    {
+        // return 0 for invalid move
+        // and 10 for valid move
+
+        int signal= 20;
+
+        System.out.println("Location: " + location);
+
+        for(int i=0; i<9; i++)
+        {
+            if(checkArray[location-1] == 0)
+            {
+                signal = 0;
+                return signal;
+            }
+            else
+            {
+                signal = 10;
+                checkArray[location-1] = 0;
+                for(int j=0; j<9; j++)
+                {
+                    System.out.print(checkArray[j]);
+                    System.out.print(" ");
+                }
+
+            }
+        }
+
+        return signal;
+    }
+
+
+    //----------------------------------------------------------
+    //----------------------Notifications-----------------------
+    //----------------------------------------------------------
+
+    public static void notice(int number)
+    {   
+        switch(number)
+        {
+            case 1:
+                System.out.print("Location not available!");
+                break;
+                
+                // case 2:
+                //     board[0][1] = sym;
+                //     break;
+                
+                // case 3:
+                //     board[0][2] = sym;
+                //     break;
+                
+                // case 4:
+                //     board[1][0] = sym;
+                //     break;
+
+                // case 5:
+                //     board[1][1] = sym;
+                //     break;
+                
+                // case 6:
+                //     board[1][2] = sym;
+                //     break;
+
+                // case 7:
+                //     board[2][0] = sym;
+                //     break;
+                
+                // case 8:
+                //     board[2][1] = sym;
+                //     break;
+                
+                // case 9:
+                //     board[2][2] = sym;
+                //     break;
+
+            default:
+                System.out.println("Invalid");
+        }
+    
+        
+    }
 
 }
