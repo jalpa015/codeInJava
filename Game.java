@@ -27,6 +27,8 @@ public class Game
         
         String playerSYM = "X";
 
+        aa:
+
             for(int i=0; i<9; i++)
             {
                 do
@@ -47,12 +49,27 @@ public class Game
                         
                         playerSYM = gamePlayers[checker + 2];
                         printBoard(board);
+                        
                     }
                     
 
                     System.out.println("\t " +gamePlayers[checker] + "'s Turn <----> " + gamePlayers[checker+2]);
                     playerSelection = selectLocation(checkArray);
                     checkLocation = duplicateEntry(board, checkArray, playerSelection,playerSYM);
+
+                    if(colLogic(board) == 3)
+                    {
+                        printBoard(board);
+                        System.out.println(gamePlayers[checker] +  ", You Win!");
+                        break aa;
+                    }
+                    
+                    // if(LogicDRL(board) == 3 || DLRLogic(board) == 3 || rowLogic(board) == 3)
+                    // {
+                    //     printBoard(board);
+                    //     System.out.println(gamePlayers[checker] +  ", You Win!");
+                    //     break aa;
+                    // }
 
                 }while(checkLocation == 0);
             }
@@ -211,7 +228,7 @@ public class Game
         // return 0 for invalid move
         // and 10 for valid move
 
-        int signal= 20;
+        int signal;
 
         //System.out.println("Location: " + location);
 
@@ -327,6 +344,180 @@ public class Game
         }
 
     }
+
+    //----------------------------------------------------------
+    //------------------------RowLogic-----------------------------
+    //----------------------------------------------------------
+
+    public static int rowLogic(String board[][])
+    {
+        int numberGame =0;
+        
+        for(int i=0; i<board.length; i++)
+        {
+            numberGame = 0;
+            for(int j=0; j<board.length; j++)
+            {
+                if((board[i][j].equals("X")) || (board[i][j].equals("O")))
+                {
+                    numberGame ++;
+                }
+            }
+
+            if(numberGame == 3)
+            {
+                return numberGame;
+
+            }
+        }
+
+        return numberGame;
+    }
+    
+    //----------------------------------------------------------
+    //------------------------ColLogic-----------------------------
+    //----------------------------------------------------------
+
+    public static int colLogic(String board[][])
+    {
+        int numberGame=0;
+        
+        
+        for(int i=0; i<board.length; i++)
+        {
+            int index = 0;
+            
+            for(int j = 0; j < board.length; j++)
+            {
+                if(j == index && ((board[i][j].equals("X")) || (board[i][j].equals("O"))))
+                {
+                   System.out.println(i + " " + j);
+                   numberGame++;
+                }
+            }
+            
+            
+            
+
+            if(numberGame == 3)
+            {
+                return numberGame;
+
+            }
+        }
+
+        numberGame =0;
+
+        for(int i=0; i<board.length; i++)
+        {
+            int index = 1;
+            
+            for(int j = 0; j < board.length; j++)
+            {
+                if(j == index && ((board[i][j].equals("X")) || (board[i][j].equals("O"))))
+                {
+                   System.out.println(i + " " + j);
+                   numberGame++;
+                }
+            }
+            
+
+            if(numberGame == 3)
+            {
+                return numberGame;
+
+            }
+        }
+
+        numberGame =0;
+
+        for(int i=0; i<board.length; i++)
+        {
+            int index = 2;
+            
+            for(int j = 0; j < board.length; j++)
+            {
+                if(j == index && ((board[i][j].equals("X")) || (board[i][j].equals("O"))))
+                {
+                   System.out.println(i + " " + j);
+                   numberGame++;
+                }
+            }
+            
+            
+            
+
+            if(numberGame == 3)
+            {
+                return numberGame;
+
+            }
+        }
+        
+
+        return numberGame;
+    }
+
+
+    //----------------------------------------------------------
+    //------------------------DLRLogic-----------------------------
+    //----------------------------------------------------------
+
+    public static int DLRLogic(String board[][])
+    {
+        int numberGame =0;
+        
+        for(int i=0; i<board.length; i++)
+        {
+            //numberGame = 0;
+            for(int j=board.length; j>=0; j--)
+            {
+                if((i == j) && ((board[i][j].equals("X")) || (board[i][j].equals("O"))))
+                {
+                    numberGame ++;
+                }
+            }
+
+            if(numberGame == 3)
+            {
+                return numberGame;
+
+            }
+        }
+
+        return numberGame;
+    }
+
+    //----------------------------------------------------------
+    //------------------------LogicDRL-----------------------------
+    //----------------------------------------------------------
+
+    public static int LogicDRL(String board[][])
+    {
+        int numberGame =0;
+        
+        for(int i=0; i<board.length; i++)
+        {
+
+            for(int j=(board.length-1); j>=0; j--)
+            {
+                if((i == (board.length-1)-j) && ((board[i][j].equals("X")) || (board[i][j].equals("O"))))
+                {
+                    numberGame ++;
+                }
+            }
+
+            if(numberGame == 3)
+            {
+                return numberGame;
+
+            }
+        }
+
+        return numberGame;
+    }
+
+
 
 
 }
