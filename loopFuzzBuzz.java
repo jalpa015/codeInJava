@@ -28,7 +28,7 @@ public class loopFuzzBuzz
 
             else if(i % 3 == 0)
             {
-                System.out.println(i + " - Fizz");
+                System.out.println(i + " - Fuzz");
             }
 
             else if(i % 5 == 0)
