@@ -1,6 +1,6 @@
 # ReadMe
 
-# Introduction 
+# Introduction (..updating)
 
 Here are my codes of practicing Java. 
 
@@ -11,12 +11,7 @@ Assignments are from [The Complete Java Development Bootcamp](https://www.udemy.
 | File / link                                                  | Tools used                          | Description                                                  |
 | ------------------------------------------------------------ | ----------------------------------- | ------------------------------------------------------------ |
 | [**RockPaperScissors**](https://github.com/nysdas/codeInJava/blob/main/RockPaperScissors.java) | methods, for_loop, if_else, scanner |                                                              |
-| [**FuzzBuzz**](https://github.com/nysdas/codeInJava/blob/main/loopFuzzBuzz.java) | methods, for_loop, if_else, scanner | User enters a range with starting number and ending number.<br /><br />**Requirement:**<br />print all the numbers as follows<br />number divisible by 3 must print Fuzz<br />number divisible by 5 must print Buzz<br />number divisible by both 3 and 5must print FuzzBuzz<br /> |
-|                                                              |                                     |                                                              |
-|                                                              |                                     |                                                              |
-|                                                              |                                     |                                                              |
-|                                                              |                                     |                                                              |
-|                                                              |                                     |                                                              |
+| [**FuzzBuzz**](https://github.com/nysdas/codeInJava/blob/main/loopFuzzBuzz.java) | methods, for_loop, if_else, scanner | User enters a range with starting number and ending number.<br /><br />**Requirement:**<br />print all the numbers as follows<br />number divisible by 3 must print Fuzz<br />number divisible by 5 must print Buzz<br />number divisible by both 3 and 5 must print FuzzBuzz<br /> |
 |                                                              |                                     |                                                              |
 
 
