@@ -1,5 +1,11 @@
 # ReadMe
 
+# Introduction 
+
+Here are my codes of practicing Java. Assignments are from [The Complete Java Development Bootcamp](https://www.udemy.com/course/the-complete-java-development-bootcamp/) taught by Rayan Slim and other instructors. 
+
+[**RockPaperScissors**](https://github.com/nysdas/codeInJava/blob/main/RockPaperScissors.java)
+
 
 
 ## Highest and Minimum Values

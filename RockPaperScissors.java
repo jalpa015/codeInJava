@@ -9,7 +9,7 @@ public class RockPaperScissors {
         String userEntry = "S";
         String computerEntry;
 
-        if(wantPlay())
+        if(wantPlay(scan))
         {
             System.out.println("\n");
             for(int i = 0; i<items.length; i++)
@@ -17,9 +17,8 @@ public class RockPaperScissors {
                 System.out.print(items[i] + " ");
             }
             System.out.println("\n");
-            
             System.out.print("You chose: ");
-            userEntry = scan.nextLine();
+            userEntry = scan.next();
 
             System.out.println("\nThe Computer chose: " + getRandom(items));
         }
@@ -36,18 +35,18 @@ public class RockPaperScissors {
         return items[randomItem];
     }
 
-    public static boolean wantPlay()
+    public static boolean wantPlay(Scanner scan)
     {
         //Returns the True or false
         // based on user response whether they want to play or Not
-        Scanner play = new Scanner(System.in);
+        //Scanner play = new Scanner(System.in);
         String response;
         System.out.println("\n\t***Rock Paper Scissors***\n\n");
         System.out.println("Let\'s play Rock Paper Scissors.");
         System.out.println("When I say 'shoot', Choose: rock, paper, or scissors.");
         System.out.print("Are you ready? Type 'Y' or 'y' if you are ");
-        response  = play.nextLine();
-        play.close();
+        response  = scan.next();
+    
 
         if((response.equals("Y")) || (response.equals("y")))
         {
